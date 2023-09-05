@@ -11,8 +11,8 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/catalog" component={<Catalog />} />
-        <Route path="/favorites" component={<Favorites />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/favorites" element={<Favorites />} />
         {/* <Redirect to="/" /> */}
 
         <Route path="*" element={<NotFound />} />
