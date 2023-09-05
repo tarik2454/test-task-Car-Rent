@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/adaptive-website-Car-Rent-react-test-project/static/css/main.7acaea2f.css",
-    "main.js": "/adaptive-website-Car-Rent-react-test-project/static/js/main.07d3183d.js",
+    "main.css": "/adaptive-website-Car-Rent-react-test-project/static/css/main.b7d0ba3d.css",
+    "main.js": "/adaptive-website-Car-Rent-react-test-project/static/js/main.3f1229a0.js",
     "index.html": "/adaptive-website-Car-Rent-react-test-project/index.html",
-    "main.7acaea2f.css.map": "/adaptive-website-Car-Rent-react-test-project/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/adaptive-website-Car-Rent-react-test-project/static/js/main.07d3183d.js.map"
+    "main.b7d0ba3d.css.map": "/adaptive-website-Car-Rent-react-test-project/static/css/main.b7d0ba3d.css.map",
+    "main.3f1229a0.js.map": "/adaptive-website-Car-Rent-react-test-project/static/js/main.3f1229a0.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.b7d0ba3d.css",
+    "static/js/main.3f1229a0.js"
   ]
 }
