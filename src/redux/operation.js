@@ -10,7 +10,6 @@ export const fetchCars = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await baseURL.get('/cars');
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

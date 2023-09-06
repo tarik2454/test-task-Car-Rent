@@ -19,8 +19,9 @@ export const GlobalStyle = createGlobalStyle`
 export const GlobalStyledImage = styled.img`
   display: block;
   width: 100%;
-  height: auto;
+  height: ${props => props.$height || 'auto'};
   margin-bottom: ${props => props.$marginBottom || '0'};
+  border-radius: ${({ theme }) => theme.$borderRadius};
   object-fit: cover;
 `;
 
@@ -30,21 +31,34 @@ export const GlobalStyledH1 = styled.h1`
   font-weight: 600;
   text-align: ${props => props.$textAling || 'center'};
   color: ${({ theme }) => theme.colors.$secondaryTextColor};
+
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 `;
 
 export const GlobalStyledH2 = styled.h2`
-  margin-bottom: ${props => props.$marginBottom || '7px'};
-  font-size: ${props => props.$fontSize || '17px'};
+  margin-bottom: ${props => props.$marginBottom || '8px'};
+  font-size: ${props => props.$fontSize || '16px'};
   font-weight: 500;
-  text-align: ${props => props.$textAling || 'center'};
-  color: ${({ theme }) => theme.colors.$secondaryTextColor};
+  text-align: ${props => props.$textAlign || 'center'};
+  color: ${({ theme }) => theme.colors.$primiryTextColor};
+  line-height: 1.5;
 `;
 
 export const GlobalStyledButton = styled.button`
   display: block;
-  width: fit-content;
-  padding: ${props => props.$padding || '6px 8px'};
-  font-size: ${props => props.$fontSize || '15px'};
+  width: ${props => props.$width || 'fit-content'};
+  margin-bottom: ${props => props.$marginBottom || '0'};
+  padding: ${props => props.$padding || '12px 0'};
+  font-size: ${props => props.$fontSize || '14px'};
   color: ${({ theme }) => theme.colors.$white};
   background-color: ${({ theme }) => theme.colors.$accentColor};
   border: none;
@@ -76,6 +90,7 @@ export const GlobalStyledInput = styled.input`
 
 export const GlobalStyledLink = styled(Link)`
   display: inline-block;
+  margin-bottom: ${props => props.$marginBottom || '0'};
   padding: ${props => props.$padding || '0 0'};
   font-size: ${props => props.$fontSize || '15px'};
   color: ${({ theme }) => theme.colors.$primiryTextColor};
@@ -89,6 +104,7 @@ export const GlobalStyledLink = styled(Link)`
 
 export const GlobalStyledNavLink = styled(NavLink)`
   display: inline-block;
+  margin-bottom: ${props => props.$marginBottom || '0'};
   padding: ${props => props.$padding || '0 0'};
   font-size: ${props => props.$fontSize || '15px'};
   color: ${({ theme }) => theme.colors.$primiryTextColor};
@@ -144,8 +160,8 @@ export const GlobalStyledContainer = styled.div`
     padding: 0 30px;
   }
 
-  @media screen and (min-width: 1200px) {
-    max-width: 1200px;
-    padding: 0 30px;
+  @media screen and (min-width: 1440px) {
+    max-width: 1440px;
+    padding: 0 128px;
   }
 `;
