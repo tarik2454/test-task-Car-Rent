@@ -1,5 +1,5 @@
 import { SideBar } from 'components/SideBar';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementPage } from 'redux/carsSlice';
 import { fetchCars } from 'redux/operation';
@@ -22,30 +22,28 @@ export const Catalog = () => {
   const cars = useSelector(selectCars);
   const currentPage = useSelector(selectCurrentPage);
   const itemsPerPage = useSelector(selectItemsPerPage);
-  const previousItems = useSelector(selectPreviousItems);
 
   useEffect(() => {
     dispatch(fetchCars());
   }, [dispatch]);
 
   const handleLoadMore = () => {
+    // Обновите currentPage в Redux
     dispatch(incrementPage());
   };
 
-  // Вычисление начального и конечного индексов для текущей страницы
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  // Выбор подмассива для текущей страницы
-  const currentItems = [...cars.slice(0, endIndex), ...previousItems];
+  // Определите, сколько элементов нужно показать на текущей странице
+  const itemsToDisplay = itemsPerPage * currentPage;
 
-  const totalPages = Math.ceil(cars.length / itemsPerPage);
+  // Отображаем только часть элементов на текущей странице
+  const visibleItems = cars.slice(0, itemsToDisplay);
 
   return (
     <div>
       <SideBar />
       <GlobalStyledH1>Catalog</GlobalStyledH1>
       <StyledList>
-        {currentItems.map((car, index) => (
+        {visibleItems.map((car, index) => (
           <StyledItem key={index + 1}>
             <div>
               <GlobalStyledImage
@@ -84,11 +82,7 @@ export const Catalog = () => {
           </StyledItem>
         ))}
       </StyledList>
-      <button
-        onClick={handleLoadMore}
-        disabled={currentPage >= totalPages}
-        style={{ marginBottom: '150px' }}
-      >
+      <button onClick={handleLoadMore} style={{ marginBottom: '150px' }}>
         Load more
       </button>
     </div>
