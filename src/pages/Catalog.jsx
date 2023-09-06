@@ -15,7 +15,6 @@ import {
   GlobalStyledH1,
   GlobalStyledH2,
   GlobalStyledImage,
-  GlobalStyledLink,
 } from 'styles/GlobalStyle';
 
 export const Catalog = () => {
@@ -150,6 +149,8 @@ export const StyledItemContent = styled.li`
     transform: rotate(90deg);
   }
 `;
+
+// GlobalStyledLink
 
 // const StyledLink = styled(GlobalStyledLink)`
 //   justify-content: center;
