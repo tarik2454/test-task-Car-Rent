@@ -1,5 +1,5 @@
 import { SideBar } from 'components/SideBar';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementPage } from 'redux/carsSlice';
 import { fetchCars } from 'redux/operation';
@@ -7,7 +7,6 @@ import {
   selectCars,
   selectCurrentPage,
   selectItemsPerPage,
-  selectPreviousItems,
 } from 'redux/selectors';
 import { styled } from 'styled-components';
 import {
