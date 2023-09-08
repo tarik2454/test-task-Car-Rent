@@ -1,12 +1,9 @@
 import Modal from 'components/Modal/Modal';
 import { SpriteSVG } from 'images/SpriteSVG';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  addFavoritesCar,
-  toggleFavoritesCar,
-} from 'redux/Favorites/favoritesSlice';
-import { selectFavoritesCars } from 'redux/Favorites/selectors';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { removeFavoritesCar } from 'redux/Favorites/favoritesSlice';
 import { styled } from 'styled-components';
 import {
   GlobalStyledButton,
@@ -14,7 +11,7 @@ import {
   GlobalStyledImage,
 } from 'styles/GlobalStyle';
 
-export const CarItem = car => {
+export const FavoritesItem = ({ car }) => {
   const {
     img,
     model,
@@ -26,29 +23,23 @@ export const CarItem = car => {
     type,
     id,
     accessories,
-    fuelConsumption,
-    engineSize,
-    description,
-    mileage,
-    rentalConditions,
   } = car;
 
   const dispatch = useDispatch();
+
   const [isModalOpen, setModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
   const handleLearnMoreClick = () => {
     setModalOpen(true); // Открываем модальное окно при клике на "Learn more"
   };
 
-  const favoritesCars = useSelector(selectFavoritesCars);
-
-  const handleToggleFavorites = car => {
-    dispatch(toggleFavoritesCar(car));
-  };
+  if (car.length === 0) {
+    return null; // Вернуть null, чтобы компонент не рендерился
+  }
 
   return (
     <>
       <StyledItem id={id}>
-        <div>
+        <div style={{ position: 'relative' }}>
           <GlobalStyledImage
             $height="200px"
             $marginBottom="14px"
@@ -68,42 +59,37 @@ export const CarItem = car => {
           </GlobalStyledH2>
 
           <StyledListContent>
-            <StyledItemContent>
+            {/* <StyledItemContent>
               {address.split(',').slice(-1).join('')}
             </StyledItemContent>
             <StyledItemContent>
               {address.split(',').slice(-2, -1).join('')}
-            </StyledItemContent>
+            </StyledItemContent> */}
             <StyledItemContent>{rentalCompany}</StyledItemContent>
             <StyledItemContent>{type}</StyledItemContent>
             <StyledItemContent>{make}</StyledItemContent>
             <StyledItemContent>{id}</StyledItemContent>
-            <StyledItemContent>{accessories[0]}</StyledItemContent>
+            <StyledItemContent>
+              {' '}
+              {/* {car.accessories[Math.floor(Math.random() * 3)]} */}
+            </StyledItemContent>
           </StyledListContent>
 
-          <NavLinkFavorite onClick={() => handleToggleFavorites(car)}>
-            {favoritesCars.some(item => car.id === item.id) ? (
-              <Favorite>
-                <SpriteSVG name="heart" />
-              </Favorite>
-            ) : (
-              <NotFavorite>
-                <SpriteSVG name="heart" />
-              </NotFavorite>
-            )}
+          <NavLinkFavorite onClick={() => dispatch(removeFavoritesCar(id))}>
+            <SpriteSVG name="heart" />
           </NavLinkFavorite>
         </div>
 
         <GlobalStyledButton onClick={handleLearnMoreClick} $width="100%">
           Learn more
         </GlobalStyledButton>
-      </StyledItem>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        car={car}
-      />
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          car={car}
+        />
+      </StyledItem>
     </>
   );
 };
@@ -122,7 +108,6 @@ export const StyledItem = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
 
   @media screen and (min-width: 768px) {
     width: calc((100% - 58px) / 3);

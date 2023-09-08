@@ -4,8 +4,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { incrementPage } from 'redux/Cars/carsSlice';
 import { fetchCars } from '../redux/Cars/operation';
-
-import { GlobalStyledH1 } from 'styles/GlobalStyle';
+import { GlobalStyledH1, GlobalStyledLink } from 'styles/GlobalStyle';
 
 export const Catalog = () => {
   const dispatch = useDispatch();
@@ -23,9 +22,12 @@ export const Catalog = () => {
       <SideBar />
       <GlobalStyledH1>Catalog</GlobalStyledH1>
       <CarsList />
-      <button onClick={handleLoadMore} style={{ marginBottom: '150px' }}>
+      <GlobalStyledLink
+        onClick={handleLoadMore}
+        style={{ textAlign: 'center' }}
+      >
         Load more
-      </button>
+      </GlobalStyledLink>
     </div>
   );
 };

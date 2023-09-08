@@ -32,7 +32,7 @@ export const CarsList = () => {
 
       <StyledList>
         {visibleItems.map((car, index) => {
-          return <CarItem key={index + 1} {...car} />;
+          return <CarItem key={index} {...car} />;
         })}
       </StyledList>
     </>

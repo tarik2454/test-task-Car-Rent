@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const GlobalStyledImage = styled.img`
   display: block;
-  width: 100%;
+  width: ${props => props.$width || '100%'};
   height: ${props => props.$height || 'auto'};
   margin-bottom: ${props => props.$marginBottom || '0'};
   border-radius: ${({ theme }) => theme.$borderRadius};
@@ -89,21 +89,21 @@ export const GlobalStyledInput = styled.input`
 `;
 
 export const GlobalStyledLink = styled(Link)`
-  display: inline-block;
+  display: block;
   margin-bottom: ${props => props.$marginBottom || '0'};
   padding: ${props => props.$padding || '0 0'};
   font-size: ${props => props.$fontSize || '15px'};
-  color: ${({ theme }) => theme.colors.$primiryTextColor};
+  color: ${({ theme }) => theme.colors.$accentColor};
   text-decoration: none;
   transition: ${({ theme }) => theme.$transition};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.$accentColor};
+    color: ${({ theme }) => theme.colors.$primiryTextColor};
   }
 `;
 
 export const GlobalStyledNavLink = styled(NavLink)`
-  display: inline-block;
+  display: block;
   margin-bottom: ${props => props.$marginBottom || '0'};
   padding: ${props => props.$padding || '0 0'};
   font-size: ${props => props.$fontSize || '15px'};
@@ -111,7 +111,7 @@ export const GlobalStyledNavLink = styled(NavLink)`
   text-decoration: none;
   transition: ${({ theme }) => theme.$transition};
 
-  &:after {
+  /* &:after {
     display: block;
     content: '';
     width: 0;
@@ -119,18 +119,18 @@ export const GlobalStyledNavLink = styled(NavLink)`
     background-color: ${({ theme }) => theme.colors.$accentColor};
     transform-origin: left;
     transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  } */
 
   &:hover,
   &:focus {
     color: ${({ theme }) => theme.colors.$accentColor};
   }
 
-  &.active {
+  /* &.active {
     &:after {
       width: 100%;
     }
-  }
+  } */
 
   &:hover:not(.active) {
   }
@@ -138,16 +138,15 @@ export const GlobalStyledNavLink = styled(NavLink)`
 
 export const GlobalStyledMain = styled.main`
   min-height: 100vh;
+  padding: 150px 0;
 `;
 
 export const GlobalStyledSection = styled.section`
   padding: 15px 20px;
   background-color: ${({ theme }) => theme.colors.$secondaryBgColor};
-  /* border-radius: ${({ theme }) => theme.$borderRadius}; */
 `;
 
 export const GlobalStyledContainer = styled.div`
-  display: flex;
   margin: 0 auto;
   padding: 0 20px;
 
