@@ -7,7 +7,8 @@ import { GlobalStyledH1 } from 'styles/GlobalStyle';
 
 export const FavoritesList = () => {
   const favoritesCars = useSelector(selectFavoritesCars);
-  console.log(favoritesCars);
+
+  const fill = 'red';
 
   return (
     <>
@@ -15,7 +16,7 @@ export const FavoritesList = () => {
 
       <StyledList>
         {favoritesCars.map((car, index) => {
-          return <FavoritesItem key={index} car={car} />;
+          return <FavoritesItem key={index} car={car} fill={fill} />;
         })}
       </StyledList>
     </>

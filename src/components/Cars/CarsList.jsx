@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCars } from '../../redux/Cars/operation';
 import {
   selectCars,
   selectCurrentPage,
@@ -9,6 +8,7 @@ import {
 import { styled } from 'styled-components';
 import { GlobalStyledH1 } from 'styles/GlobalStyle';
 import { CarItem } from './CarItem';
+import { fetchCars } from 'redux/Cars/operation';
 
 export const CarsList = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export const CarsList = () => {
 
       <StyledList>
         {visibleItems.map((car, index) => {
-          return <CarItem key={index} {...car} />;
+          return <CarItem key={index + 1} {...car} />;
         })}
       </StyledList>
     </>

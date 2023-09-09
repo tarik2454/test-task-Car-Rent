@@ -2,10 +2,7 @@ import Modal from 'components/Modal/Modal';
 import { SpriteSVG } from 'images/SpriteSVG';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addFavoritesCar,
-  toggleFavoritesCar,
-} from 'redux/Favorites/favoritesSlice';
+import { toggleFavoritesCar } from 'redux/Favorites/favoritesSlice';
 import { selectFavoritesCars } from 'redux/Favorites/selectors';
 import { styled } from 'styled-components';
 import {

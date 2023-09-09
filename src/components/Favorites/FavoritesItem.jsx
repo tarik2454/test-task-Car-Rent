@@ -1,9 +1,9 @@
 import Modal from 'components/Modal/Modal';
 import { SpriteSVG } from 'images/SpriteSVG';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { removeFavoritesCar } from 'redux/Favorites/favoritesSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleFavoritesCar } from 'redux/Favorites/favoritesSlice';
+import { selectFavoritesCars } from 'redux/Favorites/selectors';
 import { styled } from 'styled-components';
 import {
   GlobalStyledButton,
@@ -11,7 +11,7 @@ import {
   GlobalStyledImage,
 } from 'styles/GlobalStyle';
 
-export const FavoritesItem = ({ car }) => {
+export const FavoritesItem = ({ car, fill }) => {
   const {
     img,
     model,
@@ -26,6 +26,7 @@ export const FavoritesItem = ({ car }) => {
   } = car;
 
   const dispatch = useDispatch();
+  const favoritesCars = useSelector(selectFavoritesCars);
 
   const [isModalOpen, setModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
   const handleLearnMoreClick = () => {
@@ -35,6 +36,10 @@ export const FavoritesItem = ({ car }) => {
   if (car.length === 0) {
     return null; // Вернуть null, чтобы компонент не рендерился
   }
+
+  const handleToggleFavorites = car => {
+    dispatch(toggleFavoritesCar(car));
+  };
 
   return (
     <>
@@ -59,24 +64,30 @@ export const FavoritesItem = ({ car }) => {
           </GlobalStyledH2>
 
           <StyledListContent>
-            {/* <StyledItemContent>
+            <StyledItemContent>
               {address.split(',').slice(-1).join('')}
             </StyledItemContent>
             <StyledItemContent>
               {address.split(',').slice(-2, -1).join('')}
-            </StyledItemContent> */}
+            </StyledItemContent>
             <StyledItemContent>{rentalCompany}</StyledItemContent>
             <StyledItemContent>{type}</StyledItemContent>
             <StyledItemContent>{make}</StyledItemContent>
             <StyledItemContent>{id}</StyledItemContent>
             <StyledItemContent>
-              {' '}
-              {/* {car.accessories[Math.floor(Math.random() * 3)]} */}
+              {accessories[Math.floor(Math.random() * 3)]}
             </StyledItemContent>
           </StyledListContent>
-
-          <NavLinkFavorite onClick={() => dispatch(removeFavoritesCar(id))}>
-            <SpriteSVG name="heart" />
+          <NavLinkFavorite onClick={() => handleToggleFavorites(car)}>
+            {favoritesCars.some(item => car.id === item.id) ? (
+              <Favorite>
+                <SpriteSVG name="heart" fill={fill} />
+              </Favorite>
+            ) : (
+              <NotFavorite>
+                <SpriteSVG name="heart" fill={fill} />
+              </NotFavorite>
+            )}
           </NavLinkFavorite>
         </div>
 

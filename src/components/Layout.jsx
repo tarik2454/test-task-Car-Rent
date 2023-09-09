@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { GlobalStyledContainer, GlobalStyledMain } from 'styles/GlobalStyle';
-import { Navigation } from './Navigation';
+import { Navigation } from './Navigation/Navigation';
 
 export const Layout = () => {
   return (
