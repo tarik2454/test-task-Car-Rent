@@ -9,14 +9,13 @@ import CarItem from './CarItem/CarItem';
 import { StyledList } from './CarsList/CarsList.styled';
 import styled from 'styled-components';
 import { clearFilter } from 'redux/Filter/filterSlice';
-import { GlobalStyledButton, GlobalStyledLink } from 'styles/GlobalStyle';
+import { GlobalStyledLink } from 'styles/GlobalStyle';
 
 export const FilteredCars = () => {
   const dispatch = useDispatch(); // Получите диспетчер Redux
   const filteredProducts = useSelector(selectFilteredProducts);
   const filteredProductsPrice = useSelector(selectFilteredProductsPrice);
   const filterValue = useSelector(selectFilterValue);
-
   const hasFilterValue = Boolean(filterValue);
 
   const matchingProducts = filteredProducts.filter(product => {
@@ -27,9 +26,8 @@ export const FilteredCars = () => {
 
   const itemsDisplayed = matchingProducts.length;
 
-  // Функция для сброса фильтра
   const handleResetFilter = () => {
-    dispatch(clearFilter()); // Используйте экшен для сброса фильтра
+    dispatch(clearFilter());
   };
 
   return (
@@ -50,7 +48,6 @@ export const FilteredCars = () => {
           </StyledMessage>
         )}
       </StyledList>
-      {/* {itemsDisplayed >= 8 && <button>Load more</button>} */}
     </>
   );
 };

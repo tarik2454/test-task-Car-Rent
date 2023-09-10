@@ -4,11 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavoritesCar } from 'redux/Favorites/favoritesSlice';
 import { selectFavoritesCars } from 'redux/Favorites/selectors';
-import {
-  GlobalStyledButton,
-  GlobalStyledH2,
-  GlobalStyledImage,
-} from 'styles/GlobalStyle';
+import { GlobalStyledButton, GlobalStyledH2 } from 'styles/GlobalStyle';
 import {
   NavLinkFavorite,
   StyledFavorite,
@@ -38,6 +34,23 @@ const CarItem = car => {
     mileage,
     rentalConditions,
   } = car;
+  const carModal = {
+    img,
+    model,
+    make,
+    rentalPrice,
+    year,
+    address,
+    rentalCompany,
+    type,
+    id,
+    accessories,
+    fuelConsumption,
+    engineSize,
+    description,
+    mileage,
+    rentalConditions,
+  };
 
   const dispatch = useDispatch();
   const [isModalOpen, setModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
@@ -101,7 +114,7 @@ const CarItem = car => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
-        car={car}
+        car={carModal}
       />
     </>
   );
