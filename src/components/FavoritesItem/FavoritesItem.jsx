@@ -4,11 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavoritesCar } from 'redux/Favorites/favoritesSlice';
 import { selectFavoritesCars } from 'redux/Favorites/selectors';
-import {
-  GlobalStyledButton,
-  GlobalStyledH2,
-  GlobalStyledImage,
-} from 'styles/GlobalStyle';
+import { GlobalStyledButton, GlobalStyledH2 } from 'styles/GlobalStyle';
 import {
   NavLinkFavorite,
   StyledFavorite,
