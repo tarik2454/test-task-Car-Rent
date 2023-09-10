@@ -34,7 +34,8 @@ export const SideBar = () => {
   };
 
   const handleFilterSubmit = () => {
-    dispatch(filterProducts()) && dispatch(filteredProductsPrice());
+    dispatch(filterProducts());
+    dispatch(filteredProductsPrice());
   };
 
   const uniqueMakes = Array.from(new Set(cars.map(product => product.make)));

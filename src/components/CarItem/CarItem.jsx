@@ -53,9 +53,9 @@ const CarItem = car => {
   };
 
   const dispatch = useDispatch();
-  const [isModalOpen, setModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
+  const [isModalOpen, setModalOpen] = useState(false);
   const handleLearnMoreClick = () => {
-    setModalOpen(true); // Открываем модальное окно при клике на "Learn more"
+    setModalOpen(true);
   };
 
   const favoritesCars = useSelector(selectFavoritesCars);
