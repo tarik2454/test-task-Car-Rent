@@ -1,49 +1,51 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { styled } from 'styled-components';
-import { GlobalStyledLink } from 'styles/GlobalStyle';
+import {
+  StyledLogo,
+  StyledNavList,
+  StyledNavigation,
+} from './Navigation.styled';
+import { GlobalStyledLink, GlobalStyledNavLink } from 'styles/GlobalStyle';
+import logo from '../../images/icons8.png';
 
 export const Navigation = () => {
   const location = useLocation();
 
   return (
     <StyledNavigation>
-      <NavList>
+      <GlobalStyledLink to="/">
+        <StyledLogo src={logo} width="40px" height="40px" alt="Car" />
+      </GlobalStyledLink>
+
+      <StyledNavList>
         <li>
-          <GlobalStyledLink $fontSize="17px" to="/" state={{ from: location }}>
+          <GlobalStyledNavLink
+            $fontSize="17px"
+            to="/"
+            state={{ from: location }}
+          >
             Номе
-          </GlobalStyledLink>
+          </GlobalStyledNavLink>
         </li>
         <li>
-          <GlobalStyledLink
+          <GlobalStyledNavLink
             $fontSize="17px"
             to="/catalog"
             state={{ from: location }}
           >
             Catalog
-          </GlobalStyledLink>
+          </GlobalStyledNavLink>
         </li>
         <li>
-          <GlobalStyledLink
+          <GlobalStyledNavLink
             $fontSize="17px"
             to="/favorites"
             state={{ from: location }}
           >
             Favorites
-          </GlobalStyledLink>
+          </GlobalStyledNavLink>
         </li>
-      </NavList>
+      </StyledNavList>
     </StyledNavigation>
   );
 };
-
-export const StyledNavigation = styled.nav`
-  margin-top: 15px;
-`;
-
-export const NavList = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-`;

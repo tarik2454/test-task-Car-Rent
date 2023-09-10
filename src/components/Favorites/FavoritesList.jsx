@@ -1,32 +1,37 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectFavoritesCars } from 'redux/Favorites/selectors';
-import { styled } from 'styled-components';
-import { FavoritesItem } from './FavoritesItem';
+import { FavoritesItem } from '../FavoritesItem/FavoritesItem';
 import { GlobalStyledH1 } from 'styles/GlobalStyle';
+import { StyledList } from './FavoritesList.styled';
+import { fetchCars } from 'redux/Cars/operation';
+import { selectFilteredProducts } from 'redux/Filter/selectors';
+import { FilteredCars } from 'components/FilteredCars';
 
 export const FavoritesList = () => {
   const favoritesCars = useSelector(selectFavoritesCars);
+  const filteredProducts = useSelector(selectFilteredProducts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCars());
+  }, [dispatch]);
 
   const fill = 'red';
 
   return (
     <>
-      <GlobalStyledH1>Catalog</GlobalStyledH1>
+      <GlobalStyledH1>Favorites cars</GlobalStyledH1>
 
-      <StyledList>
-        {favoritesCars.map((car, index) => {
-          return <FavoritesItem key={index} car={car} fill={fill} />;
-        })}
-      </StyledList>
+      {filteredProducts.length ? (
+        <FilteredCars />
+      ) : (
+        <StyledList>
+          {favoritesCars.map((car, index) => {
+            return <FavoritesItem key={index} car={car} fill={fill} />;
+          })}
+        </StyledList>
+      )}
     </>
   );
 };
-
-export const StyledList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 29px;
-  row-gap: 50px;
-  margin-bottom: 100px;
-`;

@@ -1,5 +1,5 @@
-import { CarsList } from 'components/Cars/CarsList';
-import { SideBar } from 'components/SideBar';
+import { CarsList } from 'components/CarsList/CarsList';
+import { SideBar } from 'components/SideBar/SideBar';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { incrementPage } from 'redux/Cars/carsSlice';
@@ -18,16 +18,13 @@ export const Catalog = () => {
   };
 
   return (
-    <div>
+    <>
       <SideBar />
       <GlobalStyledH1>Catalog</GlobalStyledH1>
       <CarsList />
-      <GlobalStyledLink
-        onClick={handleLoadMore}
-        style={{ textAlign: 'center' }}
-      >
+      <GlobalStyledLink onClick={handleLoadMore} $textAlign="center">
         Load more
       </GlobalStyledLink>
-    </div>
+    </>
   );
 };

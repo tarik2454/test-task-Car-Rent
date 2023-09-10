@@ -8,7 +8,8 @@ const theme = {
     $primiryBgColor: '#fff',
     $secondaryBgColor: '#fff',
 
-    $accentColor: '#3470ff',
+    $accentColor: '#3470FF',
+    $accentColorActiv: '#0B44CD',
   },
 
   $borderRadius: '12px',

@@ -57,8 +57,9 @@ export const GlobalStyledButton = styled.button`
   display: block;
   width: ${props => props.$width || 'fit-content'};
   margin-bottom: ${props => props.$marginBottom || '0'};
-  padding: ${props => props.$padding || '12px 0'};
+  padding: ${props => props.$padding || '8px 24px'};
   font-size: ${props => props.$fontSize || '14px'};
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.$white};
   background-color: ${({ theme }) => theme.colors.$accentColor};
   border: none;
@@ -67,8 +68,7 @@ export const GlobalStyledButton = styled.button`
   transition: ${({ theme }) => theme.$transition};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.$black};
-    background-color: #0499c9;
+    background-color: ${({ theme }) => theme.colors.$accentColorActiv};
   }
 `;
 
@@ -94,11 +94,13 @@ export const GlobalStyledLink = styled(Link)`
   padding: ${props => props.$padding || '0 0'};
   font-size: ${props => props.$fontSize || '15px'};
   color: ${({ theme }) => theme.colors.$accentColor};
+  text-align: ${props => props.$textAlign || ''};
   text-decoration: none;
   transition: ${({ theme }) => theme.$transition};
 
-  &:hover {
-    color: ${({ theme }) => theme.colors.$primiryTextColor};
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.$accentColorActiv};
   }
 `;
 
@@ -107,38 +109,47 @@ export const GlobalStyledNavLink = styled(NavLink)`
   margin-bottom: ${props => props.$marginBottom || '0'};
   padding: ${props => props.$padding || '0 0'};
   font-size: ${props => props.$fontSize || '15px'};
-  color: ${({ theme }) => theme.colors.$primiryTextColor};
+  color: ${({ theme }) => theme.colors.$accentColor};
+  text-align: ${props => props.$textAlign || ''};
   text-decoration: none;
   transition: ${({ theme }) => theme.$transition};
 
-  /* &:after {
+  &:after {
     display: block;
     content: '';
-    width: 0;
+    width: 0%;
     height: 2px;
-    background-color: ${({ theme }) => theme.colors.$accentColor};
+    background-color: ${({ theme }) => theme.colors.$accentColorActiv};
     transform-origin: left;
     transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  } */
-
-  &:hover,
-  &:focus {
-    color: ${({ theme }) => theme.colors.$accentColor};
   }
 
-  /* &.active {
+  &.active {
     &:after {
       width: 100%;
     }
-  } */
+  }
+
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.$accentColorActiv};
+  }
 
   &:hover:not(.active) {
   }
 `;
 
 export const GlobalStyledMain = styled.main`
-  min-height: 100vh;
-  padding: 135px 0;
+  min-height: calc(100vh - 50px);
+  padding: 45px 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 60px 0;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 135px 0;
+  }
 `;
 
 export const GlobalStyledSection = styled.section`

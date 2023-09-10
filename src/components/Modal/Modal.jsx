@@ -1,12 +1,20 @@
 import { SpriteSVG } from 'images/SpriteSVG';
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { styled } from 'styled-components';
+import { GlobalStyledH2 } from 'styles/GlobalStyle';
 import {
-  GlobalStyledButton,
-  GlobalStyledH2,
-  GlobalStyledImage,
-} from 'styles/GlobalStyle';
+  StyledBackdrop,
+  StyledButton,
+  StyledH2Content,
+  StyledImage,
+  StyledItem,
+  StyledItemContent,
+  StyledLink,
+  StyledList,
+  StyledListContent,
+  StyledModalContent,
+  StyledSpan,
+} from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -24,7 +32,7 @@ const Modal = ({ isOpen, onClose, car }) => {
   }, [onClose]);
 
   if (!isOpen) {
-    return null; // Если модальное окно закрыто, не отображаем ничего
+    return null;
   }
 
   return createPortal(
@@ -37,9 +45,9 @@ const Modal = ({ isOpen, onClose, car }) => {
         }}
       >
         <StyledModalContent>
-          <GlobalStyledImage
-            $width="461px"
-            $height="248px"
+          <StyledImage
+            // $width="461px"
+            // $height="248px"
             $marginBottom="14px"
             src={car.img}
             alt={car.model}
@@ -103,105 +111,3 @@ const Modal = ({ isOpen, onClose, car }) => {
 };
 
 export default Modal;
-
-export const StyledBackdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(34, 13, 91, 0.23);
-  backdrop-filter: blur(3.5px);
-`;
-
-export const StyledModalContent = styled.div`
-  max-width: 541px;
-  height: fit-content;
-  padding: 40px;
-  background-color: ${({ theme }) => theme.colors.$primiryBgColor};
-  border-radius: ${({ theme }) => theme.$borderRadius};
-
-  position: relative;
-`;
-
-export const StyledListContent = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
-
-  color: rgba(18, 20, 23, 0.5);
-  font-size: 12px;
-  line-height: 1.5;
-`;
-
-export const StyledItemContent = styled.li`
-  display: flex;
-  align-items: center;
-
-  &:after {
-    display: block;
-    content: '';
-    height: 1px;
-    width: 13px;
-    background-color: rgba(18, 20, 23, 0.1);
-    transform: rotate(90deg);
-  }
-`;
-
-export const StyledH2Content = styled.span`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const StyledSpan = styled.span`
-  color: ${({ theme }) => theme.colors.$accentColor};
-`;
-
-export const StyledList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-
-  color: rgba(18, 20, 23, 0.5);
-  font-size: 12px;
-  line-height: 1.5;
-`;
-
-export const StyledItem = styled.li`
-  padding: 7px 14px;
-  color: ${({ theme }) => theme.colors.$primiryTextColor};
-  background-color: #f9f9f9;
-  border-radius: 35px;
-  font-size: 12px;
-  line-height: 1.5;
-`;
-
-export const StyledButton = styled(GlobalStyledButton)`
-  display: flex;
-  padding: 2px;
-  background-color: transparent;
-
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 2;
-
-  &:hover {
-    background-color: transparent;
-  }
-`;
-
-export const StyledLink = styled.a`
-  padding: 12px 50px;
-  color: ${({ theme }) => theme.colors.$white};
-  background-color: ${({ theme }) => theme.colors.$accentColor};
-  border-radius: ${({ theme }) => theme.$borderRadius};
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-`;
