@@ -4,9 +4,9 @@ const filterSlice = createSlice({
   name: 'filterProductsSlice',
   initialState: {
     items: [],
-    filterValue: '',
+    filterValueBrand: '',
+    filteredProductsBrand: [],
     filterValuePrices: null,
-    filteredProducts: [],
     filteredProductsPrice: [],
   },
 
@@ -14,20 +14,20 @@ const filterSlice = createSlice({
     setItems: (state, action) => {
       state.items = action.payload;
     },
-    setFilterValue: (state, action) => {
-      state.filterValue = action.payload;
+    setFilterValueBrand: (state, action) => {
+      state.filterValueBrand = action.payload;
+    },
+    setFilteredProductsBrand: state => {
+      const filterValueBrand = state.filterValueBrand.toLowerCase();
+
+      state.filteredProductsBrand = state.items.filter(product =>
+        product.make.toLowerCase().includes(filterValueBrand)
+      );
     },
     setFilterValuePrices: (state, action) => {
       state.filterValuePrices = action.payload;
     },
-    filterProducts: state => {
-      const filterValue = state.filterValue.toLowerCase();
-
-      state.filteredProducts = state.items.filter(product =>
-        product.make.toLowerCase().includes(filterValue)
-      );
-    },
-    filteredProductsPrice: state => {
+    setFilteredProductsPrice: state => {
       const filterValuePrices = state.filterValuePrices;
 
       state.filteredProductsPrice = state.items.filter(product => {
@@ -39,20 +39,20 @@ const filterSlice = createSlice({
       });
     },
     clearFilter: state => {
-      state.filterValue = '';
+      state.filterValueBrand = '';
       state.filterValuePrices = null;
-      state.filteredProducts = [];
+      state.filteredProductsBrand = [];
       state.filteredProductsPrice = [];
     },
   },
 });
 
 export const {
-  setFilterValue,
+  setFilterValueBrand,
   setFilterValuePrices,
-  filterProducts,
+  setFilteredProductsBrand,
   setItems,
-  filteredProductsPrice,
+  setFilteredProductsPrice,
   clearFilter,
 } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;

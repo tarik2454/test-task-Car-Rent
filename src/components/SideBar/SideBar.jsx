@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { selectCars } from 'redux/Cars/selectors';
 import {
-  filterProducts,
-  filteredProductsPrice,
-  setFilterValue,
+  setFilterValueBrand,
   setFilterValuePrices,
+  setFilteredProductsBrand,
+  setFilteredProductsPrice,
   setItems,
 } from 'redux/Filter/filterSlice';
 import { GlobalStyledButton } from 'styles/GlobalStyle';
-import { StyledFilter, StyledName } from './SideBar,styled';
+import { StyledFilter, StyledName } from './SideBar.styled';
 
 export const SideBar = () => {
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ export const SideBar = () => {
     dispatch(setItems(cars));
   }, [dispatch, cars]);
 
-  const handleFilterChange = selectedOption => {
-    dispatch(setFilterValue(selectedOption.value));
+  const handleBrandChange = selectedOption => {
+    dispatch(setFilterValueBrand(selectedOption.value));
   };
 
   const handlePriceChange = selectedOption => {
@@ -34,8 +34,8 @@ export const SideBar = () => {
   };
 
   const handleFilterSubmit = () => {
-    dispatch(filterProducts());
-    dispatch(filteredProductsPrice());
+    dispatch(setFilteredProductsBrand());
+    dispatch(setFilteredProductsPrice());
   };
 
   const uniqueMakes = Array.from(new Set(cars.map(product => product.make)));
@@ -59,7 +59,7 @@ export const SideBar = () => {
         <StyledName>Car brand</StyledName>
         <Select
           options={options}
-          onChange={handleFilterChange}
+          onChange={handleBrandChange}
           placeholder="Select brand"
         />
       </div>

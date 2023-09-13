@@ -9,15 +9,19 @@ import { GlobalStyledH1 } from 'styles/GlobalStyle';
 import CarItem from '../CarItem/CarItem';
 import { fetchCars } from 'redux/Cars/operation';
 import { StyledList } from './CarsList.styled';
-import { selectFilteredProducts } from 'redux/Filter/selectors';
 import { FilteredCars } from 'components/FilteredCars';
+import {
+  selectFilteredProductsBrand,
+  selectFilteredProductsPrice,
+} from 'redux/Filter/selectors';
 
 export const CarsList = () => {
   const dispatch = useDispatch();
   const cars = useSelector(selectCars);
   const currentPage = useSelector(selectCurrentPage);
   const itemsPerPage = useSelector(selectItemsPerPage);
-  const filteredProducts = useSelector(selectFilteredProducts);
+  const filteredProductsBrand = useSelector(selectFilteredProductsBrand);
+  const filteredProductsPrice = useSelector(selectFilteredProductsPrice);
 
   useEffect(() => {
     dispatch(fetchCars());
@@ -31,7 +35,7 @@ export const CarsList = () => {
     <>
       <GlobalStyledH1>Catalog</GlobalStyledH1>
 
-      {filteredProducts.length ? (
+      {filteredProductsBrand.length || filteredProductsPrice.length ? (
         <FilteredCars />
       ) : (
         <StyledList>
