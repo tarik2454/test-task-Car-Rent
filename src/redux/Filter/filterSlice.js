@@ -8,6 +8,7 @@ const filterSlice = createSlice({
     filteredProductsBrand: [],
     filterValuePrices: null,
     filteredProductsPrice: [],
+    searchButton: false,
   },
 
   reducers: {
@@ -44,6 +45,10 @@ const filterSlice = createSlice({
       state.filteredProductsBrand = [];
       state.filteredProductsPrice = [];
     },
+    setSearchButton: (state, action) => {
+      console.log(state.searchButton);
+      state.searchButton = action.payload;
+    },
   },
 });
 
@@ -54,5 +59,6 @@ export const {
   setItems,
   setFilteredProductsPrice,
   clearFilter,
+  setSearchButton,
 } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;

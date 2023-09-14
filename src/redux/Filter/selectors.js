@@ -5,3 +5,4 @@ export const selectFilteredProductsBrand = state =>
   state.filter.filteredProductsBrand;
 export const selectFilteredProductsPrice = state =>
   state.filter.filteredProductsPrice;
+export const selectSearchButton = state => state.filter.searchButton;

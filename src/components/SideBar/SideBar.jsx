@@ -8,6 +8,7 @@ import {
   setFilteredProductsBrand,
   setFilteredProductsPrice,
   setItems,
+  setSearchButton,
 } from 'redux/Filter/filterSlice';
 import { GlobalStyledButton } from 'styles/GlobalStyle';
 import { StyledFilter, StyledName } from './SideBar.styled';
@@ -36,6 +37,7 @@ export const SideBar = () => {
   const handleFilterSubmit = () => {
     dispatch(setFilteredProductsBrand());
     dispatch(setFilteredProductsPrice());
+    dispatch(setSearchButton(true));
   };
 
   const uniqueMakes = Array.from(new Set(cars.map(product => product.make)));
@@ -58,6 +60,34 @@ export const SideBar = () => {
       <div>
         <StyledName>Car brand</StyledName>
         <Select
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              width: '224px',
+              padding: '6px 10px',
+              fontSize: '18px',
+              background: '#F7F7FB',
+              border: 'none',
+              borderRadius: '14px',
+              outline: '2px solid',
+              outlineColor: state.isFocused ? 'black' : 'transparent',
+              cursor: 'pointer',
+            }),
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              color: state.isSelected ? '#121417;' : '#8a8a89',
+              backgroundColor: 'none',
+              cursor: 'pointer',
+            }),
+            menu: (baseStyles, state) => ({
+              ...baseStyles,
+              background: '#fff',
+              borderRadius: '14px',
+              border: '1px solid rgba(18, 20, 23, 0.05)',
+              boxShadow: '0px 4px 36px 0px rgba(0, 0, 0, 0.02)',
+              overflow: 'auto',
+            }),
+          }}
           options={options}
           onChange={handleBrandChange}
           placeholder="Select brand"
@@ -66,6 +96,34 @@ export const SideBar = () => {
       <div>
         <StyledName>Price/ 1 hour</StyledName>
         <Select
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              width: '224px',
+              padding: '6px 10px',
+              fontSize: '18px',
+              background: '#F7F7FB',
+              border: 'none',
+              borderRadius: '14px',
+              outline: '2px solid',
+              outlineColor: state.isFocused ? 'black' : 'transparent',
+              cursor: 'pointer',
+            }),
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              color: state.isSelected ? '#121417;' : '#8a8a89',
+              backgroundColor: 'none',
+              cursor: 'pointer',
+            }),
+            menu: (baseStyles, state) => ({
+              ...baseStyles,
+              background: '#fff',
+              borderRadius: '14px',
+              border: '1px solid rgba(18, 20, 23, 0.05)',
+              boxShadow: '0px 4px 36px 0px rgba(0, 0, 0, 0.02)',
+              overflow: 'auto',
+            }),
+          }}
           options={options2}
           onChange={handlePriceChange}
           placeholder="Select price"

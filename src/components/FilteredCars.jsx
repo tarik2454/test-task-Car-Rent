@@ -5,12 +5,13 @@ import {
   selectFilteredProductsPrice,
   selectFilterValueBrand,
   selectFilterValuePrices,
+  selectSearchButton,
 } from 'redux/Filter/selectors';
 import CarItem from './CarItem/CarItem';
 import { StyledList } from './CarsList/CarsList.styled';
 import styled from 'styled-components';
-import { clearFilter } from 'redux/Filter/filterSlice'; // Импортируйте ваши экшены
-import { GlobalStyledLink } from 'styles/GlobalStyle';
+import { clearFilter } from 'redux/Filter/filterSlice';
+import { FilterMessage } from './FilterMessage';
 
 export const FilteredCars = () => {
   const dispatch = useDispatch();
@@ -18,12 +19,15 @@ export const FilteredCars = () => {
   const filteredProductsBrand = useSelector(selectFilteredProductsBrand);
   const filterValuePrices = useSelector(selectFilterValuePrices);
   const filteredProductsPrice = useSelector(selectFilteredProductsPrice);
+  const searchButton = useSelector(selectSearchButton);
+  console.log(searchButton);
 
   console.log(filterValuePrices);
   console.log(filteredProductsPrice);
 
   const handleResetFilter = () => {
     dispatch(clearFilter());
+    // setSearchClicked(false); // Сбрасываем флаг при сбросе фильтра
   };
 
   return (
@@ -32,21 +36,16 @@ export const FilteredCars = () => {
         {filterValueBrand && filterValuePrices ? (
           filteredProductsBrand.length > 0 &&
           filteredProductsPrice.length > 0 ? (
-            filteredProductsBrand.map(
-              (product, index) =>
+            filteredProductsBrand.map((product, index) => {
+              console.log(product);
+              return (
                 filteredProductsPrice.some(
                   priceProduct => priceProduct.id === product.id
                 ) && <CarItem key={index} {...product} />
-            )
+              );
+            })
           ) : (
-            <StyledMessage>
-              Not found
-              <br />
-              <br />
-              <GlobalStyledLink $fontSize="17px" onClick={handleResetFilter}>
-                Reset Filter
-              </GlobalStyledLink>
-            </StyledMessage>
+            <FilterMessage handleResetFilter={handleResetFilter} />
           )
         ) : filterValueBrand ? (
           filteredProductsBrand.length > 0 ? (
@@ -54,39 +53,18 @@ export const FilteredCars = () => {
               <CarItem key={index} {...product} />
             ))
           ) : (
-            <StyledMessage>
-              Not found
-              <br />
-              <br />
-              <GlobalStyledLink $fontSize="17px" onClick={handleResetFilter}>
-                Reset Filter
-              </GlobalStyledLink>
-            </StyledMessage>
+            <FilterMessage handleResetFilter={handleResetFilter} />
           )
-        ) : filterValuePrices ? (
+        ) : filteredProductsBrand > 0 || filterValuePrices ? (
           filteredProductsPrice.length > 0 ? (
             filteredProductsPrice.map((product, index) => (
               <CarItem key={index} {...product} />
             ))
           ) : (
-            <StyledMessage>
-              Not found
-              <br />
-              <br />
-              <GlobalStyledLink $fontSize="17px" onClick={handleResetFilter}>
-                Reset Filter
-              </GlobalStyledLink>
-            </StyledMessage>
+            <FilterMessage handleResetFilter={handleResetFilter} />
           )
         ) : (
-          <StyledMessage>
-            Not found
-            <br />
-            <br />
-            <GlobalStyledLink $fontSize="17px" onClick={handleResetFilter}>
-              Reset Filter
-            </GlobalStyledLink>
-          </StyledMessage>
+          <FilterMessage handleResetFilter={handleResetFilter} />
         )}
       </StyledList>
     </>
