@@ -9,7 +9,7 @@ import { GlobalStyledH1 } from 'styles/GlobalStyle';
 import CarItem from '../CarItem/CarItem';
 import { fetchCars } from 'redux/Cars/operation';
 import { StyledList } from './CarsList.styled';
-import { FilteredCars } from 'components/FilteredCars';
+import { FilterCars } from 'components/FilterCars';
 import {
   selectFilteredProductsBrand,
   selectFilteredProductsPrice,
@@ -36,7 +36,7 @@ export const CarsList = () => {
       <GlobalStyledH1>Catalog</GlobalStyledH1>
 
       {filteredProductsBrand.length || filteredProductsPrice.length ? (
-        <FilteredCars />
+        <FilterCars />
       ) : (
         <StyledList>
           {visibleItems.map((car, index) => {

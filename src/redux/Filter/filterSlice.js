@@ -8,7 +8,7 @@ const filterSlice = createSlice({
     filteredProductsBrand: [],
     filterValuePrices: null,
     filteredProductsPrice: [],
-    searchButton: false,
+    isFilterActive: false,
   },
 
   reducers: {
@@ -39,15 +39,15 @@ const filterSlice = createSlice({
         return priceWithoutDollarSign === filterValuePrices;
       });
     },
+    setIsFilterActive: (state, action) => {
+      state.isFilterActive = action.payload;
+    },
     clearFilter: state => {
       state.filterValueBrand = '';
       state.filterValuePrices = null;
       state.filteredProductsBrand = [];
       state.filteredProductsPrice = [];
-    },
-    setSearchButton: (state, action) => {
-      console.log(state.searchButton);
-      state.searchButton = action.payload;
+      state.isFilterActive = false;
     },
   },
 });
@@ -59,6 +59,6 @@ export const {
   setItems,
   setFilteredProductsPrice,
   clearFilter,
-  setSearchButton,
+  setIsFilterActive,
 } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;

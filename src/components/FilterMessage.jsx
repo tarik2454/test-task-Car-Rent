@@ -1,16 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GlobalStyledLink } from 'styles/GlobalStyle';
 
-export const FilterMessage = ({ handleResetFilter }) => {
+export const FilterMessage = () => {
   return (
     <StyledMessage>
       Not found
       <br />
       <br />
-      <GlobalStyledLink $fontSize="17px" onClick={handleResetFilter}>
-        Reset Filter
-      </GlobalStyledLink>
     </StyledMessage>
   );
 };

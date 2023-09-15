@@ -3,15 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { selectCars } from 'redux/Cars/selectors';
 import {
+  clearFilter,
   setFilterValueBrand,
   setFilterValuePrices,
   setFilteredProductsBrand,
   setFilteredProductsPrice,
+  setIsFilterActive,
   setItems,
-  setSearchButton,
 } from 'redux/Filter/filterSlice';
 import { GlobalStyledButton } from 'styles/GlobalStyle';
 import { StyledFilter, StyledName } from './SideBar.styled';
+import {
+  selectFilterValueBrand,
+  selectFilterValuePrices,
+} from 'redux/Filter/selectors';
+import { setCurrentPage } from 'redux/Cars/carsSlice';
 
 export const SideBar = () => {
   const dispatch = useDispatch();
@@ -37,7 +43,13 @@ export const SideBar = () => {
   const handleFilterSubmit = () => {
     dispatch(setFilteredProductsBrand());
     dispatch(setFilteredProductsPrice());
-    dispatch(setSearchButton(true));
+    // Активируем фильтрацию при клике на кнопку поиска
+    dispatch(setIsFilterActive(true));
+  };
+
+  const handleResetFilter = () => {
+    dispatch(clearFilter());
+    dispatch(setCurrentPage(1));
   };
 
   const uniqueMakes = Array.from(new Set(cars.map(product => product.make)));
@@ -55,11 +67,20 @@ export const SideBar = () => {
     label: price,
   }));
 
+  const filterValueBrand = useSelector(selectFilterValueBrand);
+  const filterValuePrices = useSelector(selectFilterValuePrices);
+
   return (
     <StyledFilter>
       <div>
         <StyledName>Car brand</StyledName>
         <Select
+          value={
+            filterValueBrand
+              ? { value: filterValueBrand, label: filterValueBrand }
+              : null
+          }
+          placeholder="Select brand"
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
@@ -75,7 +96,7 @@ export const SideBar = () => {
             }),
             option: (baseStyles, state) => ({
               ...baseStyles,
-              color: state.isSelected ? '#121417;' : '#8a8a89',
+              color: state.isSelected ? '#121417' : '#8a8a89',
               backgroundColor: 'none',
               cursor: 'pointer',
             }),
@@ -90,12 +111,16 @@ export const SideBar = () => {
           }}
           options={options}
           onChange={handleBrandChange}
-          placeholder="Select brand"
         />
       </div>
       <div>
         <StyledName>Price/ 1 hour</StyledName>
         <Select
+          value={
+            filterValuePrices
+              ? { value: filterValuePrices, label: filterValuePrices }
+              : null
+          }
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
@@ -111,7 +136,7 @@ export const SideBar = () => {
             }),
             option: (baseStyles, state) => ({
               ...baseStyles,
-              color: state.isSelected ? '#121417;' : '#8a8a89',
+              color: state.isSelected ? '#121417' : '#8a8a89',
               backgroundColor: 'none',
               cursor: 'pointer',
             }),
@@ -131,6 +156,9 @@ export const SideBar = () => {
       </div>
       <GlobalStyledButton $padding="14px 44px" onClick={handleFilterSubmit}>
         Search
+      </GlobalStyledButton>
+      <GlobalStyledButton $padding="14px 14px" onClick={handleResetFilter}>
+        Reset
       </GlobalStyledButton>
     </StyledFilter>
   );

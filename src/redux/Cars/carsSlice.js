@@ -4,7 +4,7 @@ import { fetchCars } from './operation';
 const initialState = {
   items: [],
   currentPage: 1,
-  itemsPerPage: 8,
+  itemsPerPage: 9,
   isLoading: false,
   error: null,
 };
@@ -16,6 +16,9 @@ export const carsSlice = createSlice({
   reducers: {
     incrementPage: (state, action) => {
       state.currentPage += 1;
+    },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
     },
   },
   extraReducers: builder => {
@@ -35,5 +38,5 @@ export const carsSlice = createSlice({
   },
 });
 
-export const { incrementPage } = carsSlice.actions;
+export const { incrementPage, setCurrentPage } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

@@ -1,34 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectFilteredProductsBrand,
   selectFilteredProductsPrice,
   selectFilterValueBrand,
   selectFilterValuePrices,
-  selectSearchButton,
+  selectIsFilterActive,
 } from 'redux/Filter/selectors';
 import CarItem from './CarItem/CarItem';
 import { StyledList } from './CarsList/CarsList.styled';
 import styled from 'styled-components';
-import { clearFilter } from 'redux/Filter/filterSlice';
+import {
+  setFilteredProductsBrand,
+  setFilteredProductsPrice,
+} from 'redux/Filter/filterSlice';
 import { FilterMessage } from './FilterMessage';
 
-export const FilteredCars = () => {
+export const FilterCars = () => {
   const dispatch = useDispatch();
   const filterValueBrand = useSelector(selectFilterValueBrand);
   const filteredProductsBrand = useSelector(selectFilteredProductsBrand);
   const filterValuePrices = useSelector(selectFilterValuePrices);
   const filteredProductsPrice = useSelector(selectFilteredProductsPrice);
-  const searchButton = useSelector(selectSearchButton);
-  console.log(searchButton);
+  const isFilterActive = useSelector(selectIsFilterActive);
 
-  console.log(filterValuePrices);
-  console.log(filteredProductsPrice);
-
-  const handleResetFilter = () => {
-    dispatch(clearFilter());
-    // setSearchClicked(false); // Сбрасываем флаг при сбросе фильтра
-  };
+  useEffect(() => {
+    // Обновляем результаты фильтрации при изменении filterValueBrand или filterValuePrices,
+    // только если isFilterActive установлен в true
+    if (isFilterActive) {
+      dispatch(setFilteredProductsBrand());
+      dispatch(setFilteredProductsPrice());
+    }
+  }, [dispatch, filterValueBrand, filterValuePrices, isFilterActive]);
 
   return (
     <>
@@ -45,7 +48,7 @@ export const FilteredCars = () => {
               );
             })
           ) : (
-            <FilterMessage handleResetFilter={handleResetFilter} />
+            <FilterMessage />
           )
         ) : filterValueBrand ? (
           filteredProductsBrand.length > 0 ? (
@@ -53,7 +56,7 @@ export const FilteredCars = () => {
               <CarItem key={index} {...product} />
             ))
           ) : (
-            <FilterMessage handleResetFilter={handleResetFilter} />
+            <FilterMessage />
           )
         ) : filteredProductsBrand > 0 || filterValuePrices ? (
           filteredProductsPrice.length > 0 ? (
@@ -61,10 +64,10 @@ export const FilteredCars = () => {
               <CarItem key={index} {...product} />
             ))
           ) : (
-            <FilterMessage handleResetFilter={handleResetFilter} />
+            <FilterMessage />
           )
         ) : (
-          <FilterMessage handleResetFilter={handleResetFilter} />
+          <FilterMessage />
         )}
       </StyledList>
     </>
