@@ -40,7 +40,6 @@ export const FilterCars = () => {
           filteredProductsBrand.length > 0 &&
           filteredProductsPrice.length > 0 ? (
             filteredProductsBrand.map((product, index) => {
-              console.log(product);
               return (
                 filteredProductsPrice.some(
                   priceProduct => priceProduct.id === product.id
@@ -58,7 +57,7 @@ export const FilterCars = () => {
           ) : (
             <FilterMessage />
           )
-        ) : filteredProductsBrand > 0 || filterValuePrices ? (
+        ) : filterValuePrices ? (
           filteredProductsPrice.length > 0 ? (
             filteredProductsPrice.map((product, index) => (
               <CarItem key={index} {...product} />

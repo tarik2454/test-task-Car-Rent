@@ -22,6 +22,8 @@ import { setCurrentPage } from 'redux/Cars/carsSlice';
 export const SideBar = () => {
   const dispatch = useDispatch();
   const cars = useSelector(selectCars);
+  const filterValueBrand = useSelector(selectFilterValueBrand);
+  const filterValuePrices = useSelector(selectFilterValuePrices);
 
   console.log(cars);
 
@@ -66,9 +68,6 @@ export const SideBar = () => {
     value: price,
     label: price,
   }));
-
-  const filterValueBrand = useSelector(selectFilterValueBrand);
-  const filterValuePrices = useSelector(selectFilterValuePrices);
 
   return (
     <StyledFilter>
