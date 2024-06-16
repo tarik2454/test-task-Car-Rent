@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/adaptive-website-Car-Rent-react-test-project/static/css/main.b7d0ba3d.css",
-    "main.js": "/adaptive-website-Car-Rent-react-test-project/static/js/main.80f07e5e.js",
-    "static/media/home_background.jpg": "/adaptive-website-Car-Rent-react-test-project/static/media/home_background.9243e15bfd883ea54e00.jpg",
-    "index.html": "/adaptive-website-Car-Rent-react-test-project/index.html",
-    "main.b7d0ba3d.css.map": "/adaptive-website-Car-Rent-react-test-project/static/css/main.b7d0ba3d.css.map",
-    "main.80f07e5e.js.map": "/adaptive-website-Car-Rent-react-test-project/static/js/main.80f07e5e.js.map"
+    "main.css": "/test-task-Car-Rent/static/css/main.b7d0ba3d.css",
+    "main.js": "/test-task-Car-Rent/static/js/main.7080cc27.js",
+    "static/media/home_background.jpg": "/test-task-Car-Rent/static/media/home_background.9243e15bfd883ea54e00.jpg",
+    "index.html": "/test-task-Car-Rent/index.html",
+    "main.b7d0ba3d.css.map": "/test-task-Car-Rent/static/css/main.b7d0ba3d.css.map",
+    "main.7080cc27.js.map": "/test-task-Car-Rent/static/js/main.7080cc27.js.map"
   },
   "entrypoints": [
     "static/css/main.b7d0ba3d.css",
-    "static/js/main.80f07e5e.js"
+    "static/js/main.7080cc27.js"
   ]
 }
