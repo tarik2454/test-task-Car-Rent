@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tarik2454.github.io/adaptive-website-Car-Rent-react-test-project/",
+  "homepage": "https://tarik2454.github.io/test-task-Car-Rent/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
